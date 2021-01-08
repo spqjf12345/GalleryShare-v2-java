@@ -1,0 +1,66 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/item_record_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#CC000000">
+
+    <TextView
+        android:id="@+id/record_rank"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:textColor="@color/white"
+
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/record_name"
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/record_name"
+        android:layout_width="60dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="@color/white"
+
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/record_rank"
+        app:layout_constraintLeft_toRightOf="@+id/record_rank"
+        app:layout_constraintRight_toLeftOf="@+id/record_score"
+        tools:text="Name" />
+
+    <TextView
+        android:id="@+id/record_score"
+        android:layout_width="60dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/white"
+
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/record_name"
+        app:layout_constraintLeft_toRightOf="@+id/record_name"
+        app:layout_constraintRight_toLeftOf="@+id/record_time"
+        tools:text="100" />
+
+    <TextView
+        android:id="@+id/record_time"
+        android:layout_width="60dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/white"
+
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/record_score"
+        app:layout_constraintLeft_toRightOf="@+id/record_score"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="60:00" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
