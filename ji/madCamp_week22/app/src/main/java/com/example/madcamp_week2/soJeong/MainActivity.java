@@ -15,6 +15,7 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.share.internal.VideoUploader;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-       
+
         LoginManager.getInstance().retrieveLoginStatus(this, new LoginStatusCallback() {
             @Override
             public void onCompleted(AccessToken accessToken) {
@@ -89,17 +90,24 @@ public class MainActivity extends AppCompatActivity {
         boolean isLoggedIn = faccessToken != null && !faccessToken.isExpired();
 
         LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"));
-        Button sub_button = (Button)findViewById(R.id.sub);
-        sub_button.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
 
-                Intent intent = new Intent(getApplicationContext(), serverConnect.class);
-                startActivityForResult(intent, 1001);
-            }
-        });
+        if (isLoggedIn){
+            Intent intent = new Intent(MainActivity.this, serverConnect.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("userid", faccessToken.getUserId());
+            bundle.putString("token", faccessToken.getToken());
+            bundle.putString("appId", faccessToken.getApplicationId());
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
 
-
-
+//        Button sub_button = (Button)findViewById(R.id.sub);
+//
+//        sub_button.setOnClickListener(new View.OnClickListener(){
+//            public void onClick(View v){
+//
+//            }
+//        });
 
     }
 

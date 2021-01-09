@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">login_retry</string>
+    <string name="facebook_app_id">4959323707442646</string> <string name="fb_login_protocol_scheme">fb4959323707442646</string>
+</resources>
