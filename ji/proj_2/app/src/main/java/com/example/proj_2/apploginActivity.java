@@ -44,10 +44,18 @@ public class apploginActivity extends AppCompatActivity {
                 String nickname = nicknameEditText.getText().toString();
                 Call<ResponseBody> registerreq = apiService.register(token, nickname);
 
+
                 registerreq.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if (response.code()==100){
+                        String msg = null;
+                        try {
+                            msg=response.body().string();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (msg.equals("registered")){
                             Toast.makeText(getApplicationContext(), "registered, and logged in", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(apploginActivity.this, MainActivity.class);
                             startActivity(intent);
