@@ -41,7 +41,7 @@ public class NewActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if  (response.code()==100){
-                    Toast.makeText(getApplicationContext(), \"Logged in", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
                 }
                 else if (response.code()==200){
                     Toast.makeText(getApplicationContext(), "need to register", Toast.LENGTH_SHORT).show();
