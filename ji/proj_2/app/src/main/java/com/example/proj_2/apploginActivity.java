@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,9 +20,7 @@ import retrofit2.Response;
 
 public class apploginActivity extends AppCompatActivity {
     ApiService apiService;
-    String appId;
     String token;
-    String userid;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,7 +71,13 @@ public class apploginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.d("askjk", String.valueOf(response.code()));
-                if  (response.code()==100){
+                String msg = null;
+                try {
+                    msg = response.body().string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (msg.equals("logged in")){
                     Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(apploginActivity.this, MainActivity.class);
                     startActivity(intent);

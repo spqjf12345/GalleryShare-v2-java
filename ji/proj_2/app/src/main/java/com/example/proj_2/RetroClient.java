@@ -6,6 +6,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -38,6 +39,7 @@ public class RetroClient {
 interface ApiService {
     @GET("/login/{token}")
     Call<ResponseBody> login( @Path("token") String token);
+
 
     @POST("/register/{token}/{nickname}")
     Call<ResponseBody> register(@Path("token") String token, @Path("nickname") String nickname);
