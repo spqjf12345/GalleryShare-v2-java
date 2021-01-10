@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -16,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,21 +32,24 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.json.JSONObject;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Fragment1 extends Fragment {
 
-    private ArrayList<list_contact> list ;
+    public ArrayList<list_contact> list = new ArrayList<list_contact>();
+
     RecyclerView recyclerView1;
     String[] permissions = {android.Manifest.permission.READ_CONTACTS, android.Manifest.permission.CALL_PHONE};
     String searchText = "";
     String sortText = "";
     CharSequence serach = "";
+    contactAdapter contactAdapter;
 
     @Nullable
     @Override
@@ -55,11 +60,19 @@ public class Fragment1 extends Fragment {
             recyclerView1 = rootView.findViewById(R.id.rv_json);
             recyclerView1.setLayoutManager(new LinearLayoutManager(this.getContext()));
             try {
-                list.addAll(getPhoneNumbers(sortText, searchText));
+                list = getPhoneNumbers(sortText, searchText);
+                //list.addAll(getPhoneNumbers(sortText, searchText));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            recyclerView1.getAdapter();
+
+            for(int i=0; i< list.size(); i++){
+                Log.d("listtoString", list.toString());
+            }
+
+            contactAdapter = new contactAdapter(list);
+
+            recyclerView1.setAdapter(contactAdapter);
             recyclerView1.setHasFixedSize(true);
             startProcess();
         } else {
@@ -69,15 +82,9 @@ public class Fragment1 extends Fragment {
         return rootView;
     }
 
-    void refreshFragment(Fragment fragment, FragmentManager fragmentManager){
-        FragmentTransaction ft = fragmentManager.beginTransaction();
-        ft.detach(fragment).attach(fragment).commit();
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
 
@@ -87,7 +94,6 @@ public class Fragment1 extends Fragment {
         if(requestCode == 99){
             boolean check = true;
             for(int i =0; i< grantResults.length; i++){
-
                 if(grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                     check = false;
                     break;
@@ -110,48 +116,55 @@ public class Fragment1 extends Fragment {
         recyclerView1.getAdapter().notifyDataSetChanged();
     }
     void changeList() throws IOException {
-        ArrayList<list_contact> newList = getPhoneNumbers(sortText, searchText);
+        List<list_contact> newList = getPhoneNumbers(sortText, searchText);
+        Log.d("getPhoneNumbers", getPhoneNumbers(sortText, searchText).toString());
         list.clear();
         list.addAll(newList);
-        RecyclerView rv_json = recyclerView1.findViewById(R.id.rv_json);
-        rv_json.getAdapter().notifyDataSetChanged();
-        rv_json.setHasFixedSize(true);
 
-
+        //RecyclerView rv_json = recyclerView1.findViewById(R.id.rv_json);
+        //rv_json.setAdapter(new contactAdapter());
+        //rv_json.getAdapter().notifyDataSetChanged();
+        recyclerView1.getAdapter().notifyDataSetChanged();
+        //rv_json.setAdapter(new contactAdapter()).notifyDataSetChanged();
+        //rv_json.setHasFixedSize(true);
     }
 
     ArrayList<list_contact> getPhoneNumbers(String sort, String searchName) throws IOException {
-
-        AssetManager assetManager = getResources().getAssets();
-        InputStream inputStream = assetManager.open("text_contracts");
-
-        //String jsonString = inputStream.;
-        //JSONObject jobject = JSONObject(jsonString);
         ArrayList<list_contact> list_ = new ArrayList<list_contact>();
+
+
+        //주소 값
         Uri phoneUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
         Log.d("phoneUri",phoneUri.toString());
         String[] projections = {ContactsContract.CommonDataKinds.Phone.CONTACT_ID
                 , ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
                 , ContactsContract.CommonDataKinds.Phone.NUMBER};
-        ContentResolver resolver = getActivity().getContentResolver();
+
+        Log.d("Contract",ContactsContract.CommonDataKinds.Phone.CONTACT_ID );
+        Log.d("Contract",ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME );
+        Log.d("Contract",ContactsContract.CommonDataKinds.Phone.NUMBER );
+
+        ContentResolver resolver = getContext().getContentResolver();
         String wheneClause ="";
         String optionSort = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME;
-        ArrayList<String> whereValues = new ArrayList<String>();
-        whereValues.add("%$searchName%");
-        //var whereValues: Array<String>
+
+        String[] whereValues = null;
+        if (!searchName.isEmpty() ){
+            whereValues = new String[] {"%" + searchName + "%"};
+        }
+
         Log.d("searchName", searchName);
         if(searchName.isEmpty() != true){
             wheneClause = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " like ?";
             Log.d("searchName", searchName);
             Log.d("wheneClause", wheneClause.toString());
-            Log.d("whereValues", whereValues.toString());
+            //Log.d("whereValues", whereValues.toString());
 
         }
+        Log.d("list", list.toString());
+        Cursor cursor = resolver.query(phoneUri, projections, wheneClause, whereValues, null);
 
-        Cursor cursor = resolver.query(phoneUri, projections, wheneClause, null, null);
-
-
-        while(cursor.moveToNext() == false) {
+        while(cursor.moveToNext()) {
             String id = cursor.getString(0);
             String name = cursor.getString(1);
             String number = cursor.getString(2);
@@ -171,12 +184,18 @@ public class Fragment1 extends Fragment {
             //val json_id = obj.getString("id")
             //val json_name = obj.getString("name")
             //val json_number = obj.getString("number")
+            //list_contact list = new list_contact();
+            //list.setId(id);
+            //list.setname(name);
+            //list.setnumber(number);
+
             list_.add(new list_contact(id, name, number));
             for(int i=0; i< list_.size(); i++){
                 Log.d("list_", String.valueOf(list_.indexOf(i)));
             }
 
         }
+        cursor.close();
         return list_;
     }
 
@@ -224,14 +243,14 @@ public class Fragment1 extends Fragment {
                             list.add(new list_contact(id,dialogName, dialogNumber));
 
                             dialog01.dismiss();
-                            contactAdapter.MyViewHolder.class.notify();
-                            //contactAdapter.notifyItemInserted(0);
-                            //refreshFragment(this, parentFragmentManager)
+
+                            //contactAdapter.MyViewHolder.class.notify();
+                            contactAdapter.notifyItemInserted(0);
+                            //refreshFragment(Fragment1.this, getFragmentManager());
 
                             Log.d("get_load_add", "get_load_add_button");
                             //}
 
-                            Log.d("get_load_add", "get_load_add_button");
                         }
 
                     });
@@ -246,13 +265,11 @@ public class Fragment1 extends Fragment {
         contact_Filter.addTextChangedListener(new TextWatcher(){
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            //contactAdapter crAdapter = new contactAdapter(list);
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //contactAdapter.getFilter().filter(s);
+                contactAdapter.getFilter().filter(s);
                 serach = s;
                 Log.d("serach", serach.toString());
                 searchText = s.toString();
@@ -271,5 +288,10 @@ public class Fragment1 extends Fragment {
         });
 
 
+    }
+    void refreshFragment(Fragment fragment, FragmentManager fragmentManager){
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        ft.detach(fragment).attach(fragment).commit();
+        Log.v("dialog", "Do refresh");
     }
 }

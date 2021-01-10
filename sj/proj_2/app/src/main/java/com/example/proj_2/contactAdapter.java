@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.proj_2.list_contact;
+
 import java.util.ArrayList;
 
 
@@ -22,7 +24,9 @@ public class contactAdapter extends RecyclerView.Adapter<contactAdapter.MyViewHo
     private ArrayList<list_contact> filteredList = new ArrayList<list_contact>();
     private ArrayList<list_contact> unfilterList = new ArrayList<list_contact>();
 
-
+    contactAdapter(ArrayList<list_contact> list ){
+        contact_list = list;
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name;
@@ -78,7 +82,7 @@ public class contactAdapter extends RecyclerView.Adapter<contactAdapter.MyViewHo
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View inflaterView;
         inflaterView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_contact, parent, false);
-        MyViewHolder myViewHolder = new MyViewHolder((TextView) inflaterView);
+        MyViewHolder myViewHolder = new MyViewHolder(inflaterView);
         return myViewHolder;
     }
 

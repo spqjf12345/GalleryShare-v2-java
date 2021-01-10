@@ -1,6 +1,5 @@
 package com.example.proj_2;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -8,10 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -19,9 +16,12 @@ import java.util.List;
 
 
 public class galleryAdapter extends RecyclerView.Adapter<galleryAdapter.ImageViewHolder> {
-    private Context context;
-    private ArrayList<MediaFileData> dataset = new ArrayList<MediaFileData>();
+    private ArrayList<MediaFileData> dataset;
     List<Integer> countImages;
+
+    galleryAdapter(ArrayList<MediaFileData> list){
+        this.dataset = list;
+    }
 
     class ImageViewHolder extends RecyclerView.ViewHolder {
         public ImageView grdImg;

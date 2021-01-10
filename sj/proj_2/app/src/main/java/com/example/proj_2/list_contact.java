@@ -9,7 +9,16 @@ public class list_contact {
         this.id = id;
         this.name = name;
         this.number = number;
+    }
 
+    public void setId(String id){
+        this.id = id;
+    }
+    public void setname(String name){
+        this.name = name;
+    }
+    public void setnumber(String number){
+        this.number = number;
     }
 
 }
