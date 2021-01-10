@@ -50,6 +50,8 @@
 
         </activity>
 
+        <activity android:name=".apploginActivity"/>
+        <activity android:name=".facebookloginActivity"/>
         <activity android:name=".showFullImage"></activity>
         <activity android:name=".folderActivity"></activity>
 

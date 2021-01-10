@@ -39,7 +39,7 @@ interface ApiService {
     @GET("/login/{token}")
     Call<ResponseBody> login( @Path("token") String token);
 
-    @POST("/register/{nickname}")
-    Call<ResponseBody> register(@Path("nickname") String nickname);
+    @POST("/register/{token}/{nickname}")
+    Call<ResponseBody> register(@Path("token") String token, @Path("nickname") String nickname);
 }
 

@@ -75,9 +75,7 @@ public class facebookloginActivity extends AppCompatActivity {
             Intent intent = new Intent(this, apploginActivity.class);
             Bundle bundle = new Bundle();
 
-            bundle.putString("userid", accessToken.getUserId());
             bundle.putString("token", accessToken.getToken());
-            bundle.putString("appId", accessToken.getApplicationId());
 
             intent.putExtras(bundle);
             startActivity(intent);

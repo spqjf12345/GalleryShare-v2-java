@@ -54,7 +54,7 @@ public class apploginActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             String nickname = nicknameEditText.getText().toString();
-                            Call<ResponseBody> registerreq = apiService.register(nickname);
+                            Call<ResponseBody> registerreq = apiService.register(token, nickname);
 
                             registerreq.enqueue(new Callback<ResponseBody>() {
                                 @Override
@@ -81,6 +81,7 @@ public class apploginActivity extends AppCompatActivity {
                 }
                 else if (response.code()==300){
                     Toast.makeText(getApplicationContext(), "invalid token", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
 
