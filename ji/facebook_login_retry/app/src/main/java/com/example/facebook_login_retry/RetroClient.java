@@ -27,7 +27,7 @@ public class RetroClient {
                 .client(client)
                 .build()
                 .create(ApiService.class);
-    };
+    }
 
     public ApiService getApiService() {
         return apiService;
