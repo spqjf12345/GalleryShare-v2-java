@@ -37,7 +37,6 @@ public class contactAdapter extends RecyclerView.Adapter<contactAdapter.MyViewHo
             this.name = view.findViewById(R.id.tv_name);
             this.number = view.findViewById(R.id.tv_number);
 
-
             /* delete */
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -48,7 +47,7 @@ public class contactAdapter extends RecyclerView.Adapter<contactAdapter.MyViewHo
                     View dialogView = inflater.inflate(R.layout.custom_dialog, null);
                     TextView dialogText = dialogView.findViewById(R.id.dg_content);
 
-                    dialogText.setText("${contacts_list.get(curPos).name}\n${contacts_list.get(curPos).number}\n삭제하시겠습니까?");
+                    dialogText.setText(contact_list.get(curPos).name + "\n" + contact_list.get(curPos).number + "\n 삭제하시겠습니까?");
                     builder.setView(dialogView)
                             .setTitle("연락처 삭제");
                     //.setMessage(dialogText.text.toString())contacts_list

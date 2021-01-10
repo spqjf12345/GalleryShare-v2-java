@@ -3,13 +3,11 @@ package com.example.proj_2;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -17,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,11 +29,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,15 +53,12 @@ public class Fragment1 extends Fragment {
             recyclerView1 = rootView.findViewById(R.id.rv_json);
             recyclerView1.setLayoutManager(new LinearLayoutManager(this.getContext()));
             try {
-                list = getPhoneNumbers(sortText, searchText);
-                //list.addAll(getPhoneNumbers(sortText, searchText));
+                //list = getPhoneNumbers(sortText, searchText);
+                list.addAll(getPhoneNumbers(sortText, searchText));
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            for(int i=0; i< list.size(); i++){
-                Log.d("listtoString", list.toString());
-            }
 
             contactAdapter = new contactAdapter(list);
 
@@ -223,8 +213,8 @@ public class Fragment1 extends Fragment {
                     View dialogView = inflater.inflate(R.layout.cutom_add_dialog, null);
                     dialog01.setContentView(dialogView);
                     dialog01.show();
-                    Button ADD_Button = dialogView.findViewById(R.id.addButton_);
-                    Button CANCEL_Button = dialogView.findViewById(R.id.cancelButton_);
+                    Button ADD_Button = dialogView.findViewById(R.id.group_add);
+                    Button CANCEL_Button = dialogView.findViewById(R.id.group_cancel);
 
                     CANCEL_Button.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -238,18 +228,19 @@ public class Fragment1 extends Fragment {
                         public void onClick(View v) {
                             dialog01.dismiss();
                             String id = "";
-                            String dialogName = dialogView.findViewById(R.id.addName_).toString();
-                            String dialogNumber = dialogView.findViewById(R.id.addNumber_).toString();
-                            list.add(new list_contact(id,dialogName, dialogNumber));
+                            TextView dialogName = dialogView.findViewById(R.id.tv_groupName);
+                            TextView dialogNumber = dialogView.findViewById(R.id.addNumber_);
+                            String sname = dialogName.getText().toString();
+                            String snumber = dialogNumber.getText().toString();
+
+                            list.add(new list_contact(id, sname, snumber));
 
                             dialog01.dismiss();
 
                             //contactAdapter.MyViewHolder.class.notify();
-                            contactAdapter.notifyItemInserted(0);
+                            //contactAdapter.notifyItemInserted(0);
+                            contactAdapter.notifyDataSetChanged();
                             //refreshFragment(Fragment1.this, getFragmentManager());
-
-                            Log.d("get_load_add", "get_load_add_button");
-                            //}
 
                         }
 

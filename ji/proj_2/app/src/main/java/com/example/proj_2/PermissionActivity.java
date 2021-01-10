@@ -29,8 +29,10 @@ public class PermissionActivity extends AppCompatActivity {
     String[] REQUIRED_PERMISSIONS = { Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE,
             Manifest.permission.CAMERA,  Manifest.permission.READ_PHONE_STATE,
-            Manifest.permission.WRITE_CONTACTS, Manifest.permission.SEND_SMS, Manifest.permission.READ_SMS, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-    public int[] grandResults = {-1, -1, -1, -1, -1, -1, -1, -1, -1 };
+            Manifest.permission.WRITE_CONTACTS, Manifest.permission.SEND_SMS,
+            Manifest.permission.READ_SMS, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION };
+    public int[] grandResults = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class PermissionActivity extends AppCompatActivity {
 
     }
     private void startMainActivity(){
-        Intent intent = new Intent(this, facebookloginActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
@@ -60,6 +62,9 @@ public class PermissionActivity extends AppCompatActivity {
         int readSMSPermission = ContextCompat.checkSelfPermission(this, REQUIRED_PERMISSIONS[7]);
         int writeExternalPermission = ContextCompat.checkSelfPermission(this, REQUIRED_PERMISSIONS[8]);
 
+        int accessFineLoaction = ContextCompat.checkSelfPermission(this, REQUIRED_PERMISSIONS[9]);
+        int accessCoarseLocation = ContextCompat.checkSelfPermission(this, REQUIRED_PERMISSIONS[10]);
+
         ActivityCompat.requestPermissions(PermissionActivity.this, new String[] {Manifest.permission.SEND_SMS}, MY_PERMISSION_REQUEST_SMS);
 
 
@@ -72,6 +77,8 @@ public class PermissionActivity extends AppCompatActivity {
         grandResults[6] = sendSMSPermission;
         grandResults[7] = readSMSPermission;
         grandResults[8] = writeExternalPermission;
+        grandResults[9] = accessFineLoaction;
+        grandResults[10] = accessCoarseLocation;
 
 
         if (!(grandResults[0] == PackageManager.PERMISSION_GRANTED
@@ -82,7 +89,9 @@ public class PermissionActivity extends AppCompatActivity {
                 && grandResults[5] == PackageManager.PERMISSION_GRANTED
                 && grandResults[6] == PackageManager.PERMISSION_GRANTED
                 && grandResults[7] == PackageManager.PERMISSION_GRANTED
-                && grandResults[8] == PackageManager.PERMISSION_GRANTED)) {
+                && grandResults[8] == PackageManager.PERMISSION_GRANTED
+                && grandResults[9] == PackageManager.PERMISSION_GRANTED
+                && grandResults[10] == PackageManager.PERMISSION_GRANTED)) {
 
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
@@ -93,7 +102,9 @@ public class PermissionActivity extends AppCompatActivity {
                     || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[5])
                     || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[6])
                     || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[7])
-                    || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[8])) {
+                    || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[8])
+                    || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[9])
+                    || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[10])) {
                 Snackbar.make(mLayout, "이 앱을 실행하려면 외부 저장소, 연락처, 전화 접근 권한이 필요합니다.",
                         Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
                     @Override
