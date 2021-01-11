@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -78,10 +79,6 @@ public class MapActivity extends AppCompatActivity
             List<Address> latlon = null;
             //area -> myPosition (latlon)
             try{
-                //Log.d("getFolder", getFolders.get(i).area);
-                //Log.d("getFolder", getFolders.get(i).folderName);
-                //area = getFolders.get(i)
-                //area.add(getFolders.get(i).getArea());
                 Log.d("getFolder", String.valueOf(getFolders.size()));
                 Log.d("getFolder", getFolders.get(i).area);
 
@@ -106,7 +103,8 @@ public class MapActivity extends AppCompatActivity
             image = getFolders.get(i).folderImage;
 
             makerOptions.position(myPosition);
-            makerOptions.title(getFolders.get(i).folderName);
+            makerOptions.title(String.valueOf(getFolders.get(i).folderImage));
+            makerOptions.snippet(getFolders.get(i).folderName);
             makerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.pin));
             mMap.addMarker(makerOptions);
 
@@ -170,9 +168,9 @@ public class MapActivity extends AppCompatActivity
         getFolders= new ArrayList<>();
         list_folder[] item=new list_folder[4];
         item[0]=new list_folder(R.drawable.minion1,"#1","태평로 1가 35");
-        item[1]=new list_folder(R.drawable.minion1,"#2", "마석로 110");
-        item[2]=new list_folder(R.drawable.minion1,"#3", "대학로 291");
-        item[3]=new list_folder(R.drawable.minion1,"#4", "둔산3동");
+        item[1]=new list_folder(R.drawable.minion2,"#2", "마석로 110");
+        item[2]=new list_folder(R.drawable.minion3,"#3", "대학로 291");
+        item[3]=new list_folder(R.drawable.minion4,"#4", "둔산3동");
         for(int i=0;i<4;i++) getFolders.add(item[i]);
 
     }
@@ -201,7 +199,7 @@ public class MapActivity extends AppCompatActivity
     //info 클릭 시
     @Override
     public void onInfoWindowClick(Marker marker) {
-        //intent 생성해 folderActivity 로 이동
+        //intent 생성해 ImageActivity 로 이동 (수정 필요) folderActivity -> imageActivity
         Intent intent = new Intent(getApplication(), folderActivity.class);
         startActivity(intent);
 
@@ -223,18 +221,17 @@ public class MapActivity extends AppCompatActivity
         //entire info windows cutomized
         @Override
         public View getInfoWindow(Marker marker) {
-            return null;
+            ImageView iv_title = ((ImageView) myContentsView.findViewById(R.id.iv_title));
+            TextView tvTitle = ((TextView) myContentsView.findViewById(R.id.tv_folder));
+            iv_title.setImageResource(Integer.parseInt(marker.getTitle()));
+            tvTitle.setText(marker.getSnippet());
+            return myContentsView;
         }
 
         //default info window frame and background는 유지하면서 contents만 customizing
         @Override
         public View getInfoContents(Marker marker) {
-            TextView tvTitle = ((TextView) myContentsView.findViewById(R.id.tv_folder));
-            tvTitle.setText(marker.getTitle());
-            //TextView tvSnippet = ((TextView) myContentsView.findViewById(R.id.snippet));
-            //tvSnippet.setText(marker.getSnippet());
-
-            return myContentsView;
+        return null;
         }
     }
 }

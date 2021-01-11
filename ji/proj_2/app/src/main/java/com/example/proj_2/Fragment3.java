@@ -60,25 +60,6 @@ public class Fragment3 extends Fragment implements OnMapReadyCallback
 
         groupselectAdapter.setData(groupselect);
 
-
-
-        /*recyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.setBackgroundColor(Color.BLUE);
-                Toast.makeText(getContext(), "onClick", Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(context, showFullImage.class);
-                //intent.putExtra("uri", item.uri.toString());
-                //context.startActivity(intent);
-
-//                Glide.with(holder.itemView)
-//                        .load(item.uri)
-//                        .thumbnail(0.33f)
-//                        .centerCrop()
-//                        .into((ImageView) holder.itemView);
-            }
-        });*/
-
         return view;
     }
 
