@@ -1,4 +1,4 @@
-package com.example.proj_2;
+package com.example.proj_2.tab2;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -14,9 +14,13 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.stream.Collectors;
 
-import java.util.*;
+import com.example.proj_2.R;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class OpenGalleryFolderActivity extends AppCompatActivity {
     Intent intent = new Intent();

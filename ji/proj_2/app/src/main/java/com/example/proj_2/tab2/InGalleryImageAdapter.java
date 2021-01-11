@@ -1,15 +1,14 @@
-package com.example.proj_2;
+package com.example.proj_2.tab2;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.bumptech.glide.Glide;
+
+import com.example.proj_2.R;
 
 import java.util.ArrayList;
 
@@ -36,7 +35,7 @@ public class InGalleryImageAdapter extends RecyclerView.Adapter<InGalleryImageAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull InGalleryImageAdapter.inGalleryImageHolder holder, int position) {
+    public void onBindViewHolder(@NonNull inGalleryImageHolder holder, int position) {
         MediaFileData item = dataset.get(position);
 //        holder.itemView.setOnClickListener(new View.OnClickListener() {
 //            @Override

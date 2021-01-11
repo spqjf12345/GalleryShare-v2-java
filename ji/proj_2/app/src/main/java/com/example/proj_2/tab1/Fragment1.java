@@ -1,13 +1,13 @@
-package com.example.proj_2;
+package com.example.proj_2.tab1;
 
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.ContactsContract;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,6 +18,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -28,6 +29,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.proj_2.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,7 +45,8 @@ public class Fragment1 extends Fragment {
     String searchText = "";
     String sortText = "";
     CharSequence serach = "";
-    contactAdapter contactAdapter;
+    contactAdapter contactAdapter = new contactAdapter(list);
+
 
     @Nullable
     @Override

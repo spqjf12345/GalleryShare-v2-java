@@ -1,4 +1,4 @@
-package com.example.proj_2;
+package com.example.proj_2.tab1;
 
 
 import android.app.AlertDialog;
@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import com.example.proj_2.list_contact;
+import com.example.proj_2.R;
 
 import java.util.ArrayList;
 

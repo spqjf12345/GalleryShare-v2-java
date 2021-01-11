@@ -1,4 +1,4 @@
-package com.example.proj_2;
+package com.example.proj_2.tab2;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -8,13 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.proj_2.R;
 
 import java.util.ArrayList;
 
@@ -78,16 +83,10 @@ public class Fragment2 extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView = view.findViewById(R.id.rv_group);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(this.getContext(), LinearLayout.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(groupAdapter);
-
-        recyclerView.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                //int curPos = getAdapterPosition();
-                Intent intent = new Intent(v.getContext(), /*go into gallery folder activity*/ folderActivity.class);
-                v.getContext().startActivity(intent);
-            }
-        });
     }
 
 

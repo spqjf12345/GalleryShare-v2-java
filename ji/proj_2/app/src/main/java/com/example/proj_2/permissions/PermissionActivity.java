@@ -1,25 +1,21 @@
-package com.example.proj_2;
+package com.example.proj_2.permissions;
 
 import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.proj_2.MainActivity;
+import com.example.proj_2.R;
+import com.example.proj_2.facebookloginActivity;
 import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class PermissionActivity extends AppCompatActivity {

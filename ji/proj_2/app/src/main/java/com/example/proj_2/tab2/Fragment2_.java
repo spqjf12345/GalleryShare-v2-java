@@ -1,4 +1,4 @@
-package com.example.proj_2;
+package com.example.proj_2.tab2;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,12 +22,13 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.proj_2.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.ByteArrayOutputStream;
-import java.util.*;
-
-
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 
 
 public class Fragment2_ extends Fragment {

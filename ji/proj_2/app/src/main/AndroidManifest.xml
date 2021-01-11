@@ -42,23 +42,26 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".PermissionActivity">
+        <activity android:name=".permissions.PermissionActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".facebookloginActivity"></activity>
+
         <activity android:name=".MainActivity">
 
         </activity>
 
         <activity android:name=".apploginActivity"/>
-        <activity android:name=".facebookloginActivity"/>
-        <activity android:name=".showFullImage"></activity>
-        <activity android:name=".folderActivity"></activity>
-        <activity android:name=".MapActivity"></activity>
+        <activity android:name=".tab2.fileActivity"></activity>
+        <activity android:name=".tab2.OpenGalleryFolderActivity"></activity>
+        <activity android:name=".tab2.folderActivity"></activity>
+        <activity android:name=".tab3.MapActivity"></activity>
+
+
 
     </application>
 

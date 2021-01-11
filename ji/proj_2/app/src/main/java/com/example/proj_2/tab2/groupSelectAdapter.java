@@ -1,8 +1,7 @@
-package com.example.proj_2;
+package com.example.proj_2.tab2;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -14,7 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.security.acl.Group;
+import com.example.proj_2.R;
+
 import java.util.ArrayList;
 
 public class groupSelectAdapter extends RecyclerView.Adapter<groupSelectAdapter.MyViewHolder> {

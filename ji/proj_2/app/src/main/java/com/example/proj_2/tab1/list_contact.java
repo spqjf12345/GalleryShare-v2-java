@@ -1,4 +1,4 @@
-package com.example.proj_2;
+package com.example.proj_2.tab1;
 
 public class list_contact {
     String id;

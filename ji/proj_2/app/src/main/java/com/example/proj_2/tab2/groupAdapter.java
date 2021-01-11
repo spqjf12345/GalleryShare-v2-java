@@ -1,4 +1,4 @@
-package com.example.proj_2;
+package com.example.proj_2.tab2;
 
 import android.content.Intent;
 import android.util.Log;
@@ -10,13 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.security.acl.Group;
+import com.example.proj_2.R;
+
 import java.util.ArrayList;
 
 public class groupAdapter extends RecyclerView.Adapter<groupAdapter.MyViewHolder> {
     private ArrayList<String> group = new ArrayList<String>();
 
-    groupAdapter(ArrayList<String> group_){ group = group_; }
+    public groupAdapter(ArrayList<String> group_){ group = group_; }
 
 
 
@@ -27,10 +28,12 @@ public class groupAdapter extends RecyclerView.Adapter<groupAdapter.MyViewHolder
             super(view);
             this.group_name = view.findViewById(R.id.gp_name);
             Log.d("group_name", group_name.toString());
-            itemView.setOnClickListener(new View.OnClickListener(){
+            /* click */
+            view.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
+                    Log.d("getClick", "getClick");
                     int curPos = getAdapterPosition();
-                    Intent intent = new Intent(v.getContext(), /*go into gallery folder activity*/ folderActivity.class);
+                    Intent intent = new Intent(v.getContext(), folderActivity.class);
                     v.getContext().startActivity(intent);
                 }
             });

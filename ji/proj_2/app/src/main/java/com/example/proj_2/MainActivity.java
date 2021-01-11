@@ -6,6 +6,9 @@ import androidx.viewpager.widget.ViewPager;
 import android.Manifest;
 import android.widget.Toast;
 
+import com.example.proj_2.tab1.Fragment1;
+import com.example.proj_2.tab2.Fragment2;
+import com.example.proj_2.tab3.Fragment3;
 import com.google.android.material.tabs.TabLayout;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         TedRxPermission.with(this)
                 .setDeniedMessage(
                         "If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
-                .setPermissions(Manifest.permission.READ_CONTACTS, Manifest.permission.ACCESS_FINE_LOCATION)
+                .setPermissions(Manifest.permission.READ_CONTACTS, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CAMERA)
                 .request()
                 .subscribe(tedPermissionResult -> {
                     if (tedPermissionResult.isGranted()) {

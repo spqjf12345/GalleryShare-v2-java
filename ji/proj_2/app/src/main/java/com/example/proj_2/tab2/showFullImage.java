@@ -1,12 +1,12 @@
-package com.example.proj_2;
+package com.example.proj_2.tab2;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.ImageSwitcher;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.proj_2.R;
 import com.github.chrisbanes.photoview.PhotoView;
 
 class showFullImage extends AppCompatActivity {
