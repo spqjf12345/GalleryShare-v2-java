@@ -17,16 +17,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <ImageView
-                android:layout_width="355dp"
-                android:layout_height="210dp"
-                android:id="@+id/iv_folder"/>
+                android:id="@+id/iv_folder"
+                android:layout_width="286dp"
+                android:layout_height="210dp" />
             <TextView
                 android:id="@+id/tv_folder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="ddd"/>
+
+            <TextView
+                android:id="@+id/tv_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="area"
+                android:textSize="10sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

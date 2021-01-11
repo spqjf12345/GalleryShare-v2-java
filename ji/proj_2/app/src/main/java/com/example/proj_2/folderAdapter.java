@@ -41,10 +41,12 @@ public class folderAdapter extends RecyclerView.Adapter<folderAdapter.ViewHolder
 
         holder.folder.setImageDrawable(d);
         holder.folderName.setText(item.getTitle());
+        holder.area.setText(item.getTitle());
 
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //show image
                 Toast.makeText(context,item.getTitle(),Toast.LENGTH_SHORT).show();
             }
         });
@@ -57,6 +59,7 @@ public class folderAdapter extends RecyclerView.Adapter<folderAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView folder;
+        TextView area;
         TextView folderName;
         CardView cardview;
 
@@ -64,7 +67,20 @@ public class folderAdapter extends RecyclerView.Adapter<folderAdapter.ViewHolder
             super(itemView);
             folder=(ImageView)itemView.findViewById(R.id.iv_folder);
             folderName=(TextView)itemView.findViewById(R.id.tv_folder);
+            area = (TextView)itemView.findViewById(R.id.tv_area);
             cardview=(CardView)itemView.findViewById(R.id.cardview);
+
         }
     }
+
+    public interface OnMyItemCheckedChanged {
+        public void onItemCheckedChanged(ArrayList<list_folder> item, boolean isChecked);
+    }
+    private OnMyItemCheckedChanged mOnMyItemCheckedChanged;
+
+    public void setOnMyItemCheckedChanged(OnMyItemCheckedChanged  onMyItemCheckedChanged){
+        this.mOnMyItemCheckedChanged = onMyItemCheckedChanged;
+    }
+
 }
+

@@ -30,10 +30,10 @@ public class folderActivity extends AppCompatActivity {
 
         ArrayList<list_folder> items= new ArrayList<>();
         list_folder[] item=new list_folder[5];
-        item[0]=new list_folder(R.drawable.minion1,"#1");
-        item[1]=new list_folder(R.drawable.minion2,"#2");
-        item[2]=new list_folder(R.drawable.minion3,"#3");
-        item[3]=new list_folder(R.drawable.minion4,"#4");
+        item[0]=new list_folder(R.drawable.minion1,"#1","제주도");
+        item[1]=new list_folder(R.drawable.minion2,"#2", "과천");
+        item[2]=new list_folder(R.drawable.minion3,"#3", "동두천");
+        item[3]=new list_folder(R.drawable.minion4,"#4", "부산");
 
 
         for(int i=0;i<5;i++) items.add(item[i]);
