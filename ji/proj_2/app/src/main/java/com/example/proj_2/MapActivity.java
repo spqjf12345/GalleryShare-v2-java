@@ -1,27 +1,19 @@
 package com.example.proj_2;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -31,7 +23,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.io.IOException;
 import java.util.List;
@@ -53,6 +44,8 @@ public class MapActivity extends AppCompatActivity
     private GoogleMap mMap = null;
     String area = "";
     Marker locationMarker;
+    // for loop를 통한 n개의 마커 생성
+
 
 //    Boolean needRequest = false;
 
@@ -77,60 +70,47 @@ public class MapActivity extends AppCompatActivity
 
         //지도 객체
         mMap = googleMap;
-
-        //현재 위치에 마커 설정
-        MarkerOptions marker = new MarkerOptions().position(myPosition);
-        marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.orange_marker));
-
-        LatLng myArea = myPosition; //new LatLng(37.56, 126.97); 태평로 1가 35
-        //for 태평로
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(myArea); //있어야 함
-        markerOptions.title(area); //use Image
-        markerOptions.snippet(area);
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.orange_marker));
-        mMap.addMarker(markerOptions);
-
-        locationMarker = mMap.addMarker(markerOptions);
+        MarkerOptions makerOptions = new MarkerOptions();
+        LatLng latlong = null;
+        // for loop를 통한 n개의 마커 생성
+        for (int i = 0; i < 10; i++) {
+            // 1. 마커 옵션 설정 (만드는 과정)
+             // LatLng에 대한 어레이를 만들어서 이용할 수도 있다.
+            latlong = new LatLng(37.52487 + i, 126.92723);
+            makerOptions.position(latlong);
+            makerOptions.title("마커" + i);
+            makerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.orange_marker));
+            // 2. 마커 생성 (마커를 나타냄)
+            mMap.addMarker(makerOptions);
+        }
+        locationMarker = mMap.addMarker(makerOptions);
         locationMarker.showInfoWindow(); //아래의 infowindowadapter 실행
 
+        //현재 위치에 마커 설정
+        //MarkerOptions marker = new MarkerOptions().position(myPosition);
+        //marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.orange_marker));
 
-        //info click 시
+        //LatLng myArea = myPosition; //new LatLng(37.56, 126.97); 태평로 1가 35
+        //for 태평로
+//       MarkerOptions markerOptions = new MarkerOptions();
+//        markerOptions.position(myArea); //있어야 함
+//        markerOptions.title(area); //use Image
+//        markerOptions.snippet(area);
+//        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.orange_marker));
+//        mMap.addMarker(markerOptions);
+
+        // info click
         mMap.setOnInfoWindowClickListener(this);
         mMap.setInfoWindowAdapter(new MyInfoWindowAdapter());
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myArea, 10F));
-
-        // create marker
-//        MarkerOptions marker = new MarkerOptions().position(myPosition);
-        // setting custom marker
-//        marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.pin));
-
-//        MarkerOptions markerOptions = new MarkerOptions();
-//        markerOptions.position(hamyPosition);
-
-//        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.pin));
-        //markerOptions.title(" Title");
-
-        //markerOptions.snippet(" Here comes the address ");
-
-
-        // create and add marker
-        //Marker locationMarker = map.addMarker(markerOptions);
-        // always show info text
-        //locationMarker.showInfoWindow();
-        // opening maps zoomed in at current location
-        //map.moveCamera(CameraUpdateFactory.newLatLngZoom(amsterdam, 17.0f));
+        // camera move
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlong, 10F));
 
         /*permission check - ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION*/
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
-
-
     }
 
-    private void startLocationUpdates() {
-    }
 
 
     @Override
@@ -164,16 +144,9 @@ public class MapActivity extends AppCompatActivity
                 //String address = addr.g
                 Log.d("LatLong", String.valueOf(lat) + lon);
                 myPosition = new LatLng(lat, lon);
-
             }
 
         }
-
-
-
-
-
-        //LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
 
     }
 
@@ -201,13 +174,11 @@ public class MapActivity extends AppCompatActivity
     //info 클릭 시
     @Override
     public void onInfoWindowClick(Marker marker) {
-//        //info click
+//        info click
 //        Toast.makeText(this, "Info window clicked",
 //                Toast.LENGTH_SHORT).show();
         //map marker click 시
         // marker click 시
-
-
     }
 
     class MyInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
@@ -227,10 +198,10 @@ public class MapActivity extends AppCompatActivity
         //default info window frame and background는 유지하면서 contents만 customizing
         @Override
         public View getInfoContents(Marker marker) {
-            TextView tvTitle = ((TextView) myContentsView.findViewById(R.id.title));
+            TextView tvTitle = ((TextView) myContentsView.findViewById(R.id.tv_folder));
             tvTitle.setText(marker.getTitle());
-            TextView tvSnippet = ((TextView) myContentsView.findViewById(R.id.snippet));
-            tvSnippet.setText(marker.getSnippet());
+            //TextView tvSnippet = ((TextView) myContentsView.findViewById(R.id.snippet));
+            //tvSnippet.setText(marker.getSnippet());
 
             return myContentsView;
         }

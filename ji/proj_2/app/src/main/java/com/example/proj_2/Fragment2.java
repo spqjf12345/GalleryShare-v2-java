@@ -1,6 +1,7 @@
 package com.example.proj_2;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,9 +29,11 @@ public class Fragment2 extends Fragment {
         group.add("Family");
         group.add("Friend1");
         group.add("Friend2");
+
+        /* group name add */
         Button group_add = view.findViewById(R.id.gr_add);
         group_add.setOnClickListener(new View.OnClickListener() {
-            /* group name add */
+
             @Override
             public void onClick(View v) {
                 {
@@ -77,6 +80,14 @@ public class Fragment2 extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.rv_group);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(groupAdapter);
+
+        recyclerView.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                //int curPos = getAdapterPosition();
+                Intent intent = new Intent(v.getContext(), /*go into gallery folder activity*/ folderActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
 

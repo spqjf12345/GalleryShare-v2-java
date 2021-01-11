@@ -38,21 +38,21 @@ public class InGalleryImageAdapter extends RecyclerView.Adapter<InGalleryImageAd
     @Override
     public void onBindViewHolder(@NonNull InGalleryImageAdapter.inGalleryImageHolder holder, int position) {
         MediaFileData item = dataset.get(position);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, showFullImage.class);
-                intent.putExtra("uri", item.uri.toString());
-                context.startActivity(intent);
-
-
-                Glide.with(holder.itemView)
-                        .load(item.uri)
-                        .thumbnail(0.33f)
-                        .centerCrop()
-                        .into((ImageView) holder.itemView);
-            }
-        });
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(context, showFullImage.class);
+//                intent.putExtra("uri", item.uri.toString());
+//                context.startActivity(intent);
+//
+//
+//                Glide.with(holder.itemView)
+//                        .load(item.uri)
+//                        .thumbnail(0.33f)
+//                        .centerCrop()
+//                        .into((ImageView) holder.itemView);
+//            }
+//        });
 
 
     }
@@ -61,4 +61,5 @@ public class InGalleryImageAdapter extends RecyclerView.Adapter<InGalleryImageAd
     public int getItemCount() {
         return dataset.size();
     }
+
 }
