@@ -107,7 +107,7 @@ public class MapActivity extends AppCompatActivity
 
             makerOptions.position(myPosition);
             makerOptions.title(getFolders.get(i).folderName);
-            makerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.orange_marker));
+            makerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.pin));
             mMap.addMarker(makerOptions);
 
             currentMarker = mMap.addMarker(makerOptions);
