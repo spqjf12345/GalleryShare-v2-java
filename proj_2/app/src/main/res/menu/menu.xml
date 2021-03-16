@@ -1,0 +1,20 @@
+<!--?xml version="1.0" encoding="utf-8"?-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="410dp" android:layout_height="50dp">
+
+    <item android:id="@+id/notification" android:title="notification"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/find_freinds" android:title="find friends"
+        app:showAsAction="never">
+        <menu>
+            <item android:id = "@id/sub" android:title ="이광준" />
+            <item android:id = "@id/sub" android:title ="한진운" />
+            <item android:id = "@id/sub" android:title ="고성진" />
+        </menu>
+    </item>
+
+
+
+</menu>

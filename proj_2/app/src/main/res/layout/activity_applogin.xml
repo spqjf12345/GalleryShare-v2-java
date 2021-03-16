@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/tv_enterTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="60dp"
+        android:text="회원가입"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_enterNickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="사용할 닉네임을 입력해주세요."
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_enterTitle" />
+
+    <TextView
+        android:id="@+id/tv_enterNickname2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="전화번호를 입력해주세요."
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tv_enterNickname"
+        app:layout_constraintTop_toBottomOf="@+id/nicknameEditText" />
+
+    <EditText
+        android:id="@+id/phonenumEditText"
+        android:layout_width="173dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="10dp"
+        android:hint="Phonenum"
+        app:layout_constraintStart_toStartOf="@+id/tv_enterNickname2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_enterNickname2" />
+
+    <EditText
+        android:id="@+id/nicknameEditText"
+        android:layout_width="162dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="10dp"
+        android:hint="Nickname"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_enterNickname"
+        app:layout_constraintTop_toBottomOf="@+id/tv_enterNickname" />
+
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="#FFFFFF"
+        android:text="register"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:backgroundTint="#2C000000"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phonenumEditText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
